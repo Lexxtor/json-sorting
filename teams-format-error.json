@@ -1,6 +1,5 @@
 [
-  { "team": "Axiom" },
-  { "team": "BnL", "scores": 65 },
+  { "team": "BnL", "scores": {"asd":{"zzz":1}} },
   { "team": "Eva", "scores": 99 },
   { "team": "WALL-E", "scores": 99 }
 ]

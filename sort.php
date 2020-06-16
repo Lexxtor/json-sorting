@@ -14,7 +14,7 @@ set_error_handler(function($severity, $message, $file, $line) {
 
 try {
     // приём и разбор JSON
-    $teams = json_decode(file_get_contents($address), true, 512, JSON_THROW_ON_ERROR);
+    $teams = json_decode(file_get_contents($address), true, 3, JSON_THROW_ON_ERROR);
 
     // сортировка
     usort($teams, function($a, $b) {
@@ -27,6 +27,8 @@ try {
             $rank = 1;
         } elseif ($teams[$key]['scores'] != $teams[$key-1]['scores']) {
             $rank++;
+        } else {
+        	$rank++;
         }
         $team['rank'] = $rank;
     }
@@ -37,7 +39,7 @@ try {
 } catch (Exception $e) {
     // обработка ошибок
     if ($e instanceof JsonException) {
-        fwrite(STDERR, 'Ошибка парсинга JSON.');
+        fwrite(STDERR, 'Ошибка парсинга JSON.'.$e->getMessage());
     }
     else {
         if (stripos($e->getMessage(), 'Undefined index') === 0) {
